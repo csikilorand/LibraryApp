@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package konyvtaros;
+package library;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -18,11 +18,11 @@ import java.util.List;
  *
  * @author Exodia
  */
-public class Library implements  Serializable{
+public class BooksList implements  Serializable{
     
     private List<Book> konyvek; 
     
-    public Library(){
+    public BooksList(){
         konyvek = new ArrayList<Book>();
     }
     public  Book keres(String ID){
