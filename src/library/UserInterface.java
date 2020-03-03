@@ -10,14 +10,33 @@ package library;
  * @author Exodia
  */
 public class UserInterface extends javax.swing.JFrame {
-
+    private UsersList userList;
+    private BooksList bookList;
     /**
      * Creates new form UserInterface
      */
     public UserInterface() {
         initComponents();
     }
-
+    public void addUser(){
+        User user1 = new User("Jozsef", new ContactAddress("1@email.com", "123456", "Maros utca 2"), "123456789");
+        User user2 = new User("Anita", new ContactAddress("2@email.com", "987654", "Maros utca 4"),"231456789" );
+        User user3 = user2;
+        user3.setNev("Dani");
+        userList.hozzaad(user3);
+        userList.hozzaad(user2);
+        userList.hozzaad(user1);
+    }
+    public void addBook(){
+        Book konyv1 = new Book("Egri csillagok", "Gardonyi Geza", "Budapest-kiado", 1970, 123456, "1");
+        Book konyv2 = new Book("Ember tragediaja", "Madach Imre", "kolozsvar", 2010, 321654, "2");
+        bookList.hozzaad(konyv2);
+        bookList.hozzaad(konyv1);
+        Book konyv3 = konyv2;
+        konyv3.setKiado("Kolozsvar");
+        bookList.modosit("2", konyv3);
+        
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -30,10 +49,10 @@ public class UserInterface extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         MenuBar = new javax.swing.JMenuBar();
         File = new javax.swing.JMenu();
-        jMenu4 = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
-        jMenuItem3 = new javax.swing.JMenuItem();
-        jMenu5 = new javax.swing.JMenu();
+        importAs = new javax.swing.JMenu();
+        importAsTxt = new javax.swing.JMenuItem();
+        importAsXml = new javax.swing.JMenuItem();
+        exportAs = new javax.swing.JMenu();
         jMenuItem4 = new javax.swing.JMenuItem();
         jMenuItem5 = new javax.swing.JMenuItem();
         Book = new javax.swing.JMenu();
@@ -52,25 +71,25 @@ public class UserInterface extends javax.swing.JFrame {
 
         File.setText("File");
 
-        jMenu4.setText("Import as...");
+        importAs.setText("Import as...");
 
-        jMenuItem1.setText(".txt");
-        jMenu4.add(jMenuItem1);
+        importAsTxt.setText(".txt");
+        importAs.add(importAsTxt);
 
-        jMenuItem3.setText(".xml");
-        jMenu4.add(jMenuItem3);
+        importAsXml.setText(".xml");
+        importAs.add(importAsXml);
 
-        File.add(jMenu4);
+        File.add(importAs);
 
-        jMenu5.setText("Export as...");
+        exportAs.setText("Export as...");
 
         jMenuItem4.setText(".txt");
-        jMenu5.add(jMenuItem4);
+        exportAs.add(jMenuItem4);
 
         jMenuItem5.setText(".xml");
-        jMenu5.add(jMenuItem5);
+        exportAs.add(jMenuItem5);
 
-        File.add(jMenu5);
+        File.add(exportAs);
 
         MenuBar.add(File);
 
@@ -163,6 +182,7 @@ public class UserInterface extends javax.swing.JFrame {
     }//GEN-LAST:event_AddUserActionPerformed
 
     private void AddBookActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddBookActionPerformed
+        
         // TODO add your handling code here:
     }//GEN-LAST:event_AddBookActionPerformed
 
@@ -214,10 +234,10 @@ public class UserInterface extends javax.swing.JFrame {
     private javax.swing.JMenuItem SearchBook;
     private javax.swing.JMenuItem SearchUser;
     private javax.swing.JMenu User;
-    private javax.swing.JMenu jMenu4;
-    private javax.swing.JMenu jMenu5;
-    private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem3;
+    private javax.swing.JMenu exportAs;
+    private javax.swing.JMenu importAs;
+    private javax.swing.JMenuItem importAsTxt;
+    private javax.swing.JMenuItem importAsXml;
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JScrollPane jScrollPane1;
