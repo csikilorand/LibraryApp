@@ -16,8 +16,8 @@ public class Book implements Serializable{
     private String szerzo;
     private String kiado;
     private int kiadasEve;
-    private int ISBN;
     private String ID;
+    private String ISBN;
 
 
 
@@ -25,7 +25,7 @@ public class Book implements Serializable{
         
     }
     
-    public Book(String cim, String szerzo, String kiado, int kiadasEve, int ISBN, String ID){
+    public Book(String cim, String szerzo, String kiado, int kiadasEve, String ISBN, String ID){
         this.cim = cim;
         this.szerzo = szerzo;
         this.kiado = kiado;
@@ -58,7 +58,7 @@ public class Book implements Serializable{
         this.kiadasEve = kiadasEve;
     }
 
-    public void setISBN(int ISBN) {
+    public void setISBN(String ISBN) {
         this.ISBN = ISBN;
     }
 
@@ -82,7 +82,7 @@ public class Book implements Serializable{
         return kiadasEve;
     }
 
-    public int getISBN() {
+    public String getISBN() {
         return ISBN;
     }
 

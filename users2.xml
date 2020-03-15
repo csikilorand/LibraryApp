@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Users>
+    <User id="123456789">
+        <name>Jozsef</name>
+        <ContactAddress>
+            <telSzam>123456</telSzam>
+            <UtcaNev>Maros utca 2</UtcaNev>
+            <Hazszam>0</Hazszam>
+            <Email>1@email.com</Email>
+        </ContactAddress>
+    </User>
+    <User id="231456789">
+        <name>Dani</name>
+        <ContactAddress>
+            <telSzam>987654</telSzam>
+            <UtcaNev>Maros utca 4</UtcaNev>
+            <Hazszam>0</Hazszam>
+            <Email>2@email.com</Email>
+        </ContactAddress>
+    </User>
+</Users>

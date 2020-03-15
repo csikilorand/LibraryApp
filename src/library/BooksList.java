@@ -14,6 +14,19 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import java.io.File;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerException;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
+
+import org.w3c.dom.Attr;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
 /**
  *
  * @author Exodia
@@ -96,5 +109,57 @@ public class BooksList implements  Serializable{
         }
         return false;
     } 
+    public void konyvListaMentesXML(){
+        try{
+        DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
+        DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
+            
+            //root elements
+        Document doc = docBuilder.newDocument();
+        Element rootElement = doc.createElement("Books");
+        doc.appendChild(rootElement);
         
+        for(Book bk : konyvek){
+            // Book element
+       	    Element book = doc.createElement("Book");
+            rootElement.appendChild(book);
+            // shorten way
+            book.setAttribute("id", bk.getID());
+            
+            Element cim = doc.createElement("Cim");
+            cim.appendChild(doc.createTextNode(bk.getCim()));
+            book.appendChild(cim);
+           
+            Element szerzo = doc.createElement("Szerzo");
+            szerzo.appendChild(doc.createTextNode(bk.getSzerzo()));
+            book.appendChild(szerzo);
+            
+            Element kiado = doc.createElement("Kiado");
+            kiado.appendChild(doc.createTextNode(bk.getKiado()));
+            book.appendChild(kiado);
+            
+            Element kiadasEve = doc.createElement("KiadasEve");
+            Integer i = new Integer(bk.getKiadasEve());
+            kiadasEve.appendChild(doc.createTextNode(i.toString()));
+            book.appendChild(kiadasEve);
+            
+            Element isbn = doc.createElement("ISBN");
+            isbn.appendChild(doc.createTextNode(bk.getISBN()));
+            book.appendChild(isbn);
+        }
+        // write the content into xml file
+            TransformerFactory transformerFactory = TransformerFactory.newInstance();
+            Transformer transformer = transformerFactory.newTransformer();
+            DOMSource source = new DOMSource(doc);
+            StreamResult result = new StreamResult(new File("books.xml"));
+            
+            transformer.transform(source, result);
+ 
+            System.out.println("File saved!");
+         
+    }catch(Exception e){
+        e.printStackTrace();
+    }
+        
+    }
 }

@@ -21,10 +21,10 @@ public class Main {
         String cim = "Mikszath Kalman";
         //System.out.println(Integer.MAX_VALUE);
         //System.out.println((int)Math.random()*50 );
-        Book konyv1 = new Book("Egri csillagok", "Gardonyi Geza", "Budapest-kiado", 1970, 123456, "1");
-        Book konyv2 = new Book("Ember tragediaja", "Madach Imre", "kolozsvar", 2010, 321654, "2");
-        /*
-        Library konyvLista = new Library();
+        Book konyv1 = new Book("Egri csillagok", "Gardonyi Geza", "Budapest-kiado", 1970, "123456", "1");
+        Book konyv2 = new Book("Ember tragediaja", "Madach Imre", "kolozsvar", 2010, "321654", "2");
+        
+        BooksList konyvLista = new BooksList();
         konyvLista.hozzaad(konyv2);
         konyvLista.hozzaad(konyv1);
         konyvLista.kiListaz();
@@ -37,10 +37,13 @@ public class Main {
         konyvLista.torol(konyv3.getID());
         konyvLista.kiListaz();
         
-        System.out.println(konyvLista.keres(konyv2.getID()));
-        konyvLista.konyvListaMentese();
-        System.out.println(konyvLista.userListBetoltese()) ;
-        */
+        
+        //System.out.println(konyvLista.keres(konyv2.getID()));
+        //konyvLista.konyvListaMentese();
+        //System.out.println(konyvLista.userListBetoltese()) ;
+        
+        konyvLista.konyvListaMentesXML();
+        
         User user1 = new User("Jozsef", new ContactAddress("1@email.com", "123456", "Maros utca 2"), "123456789");
         User user2 = new User("Anita", new ContactAddress("2@email.com", "987654", "Maros utca 4"),"231456789" );
         User user3 = user2;
@@ -52,8 +55,11 @@ public class Main {
         felhasznaloLista.kiListaz();
         System.out.println(felhasznaloLista.keres("123456789").toString());;
         felhasznaloLista.modosit(user3.getCNP(), user3);
-        System.out.println("List mentese:" + felhasznaloLista.userListMentese());
-        System.out.println("Lista betoltese:" + felhasznaloLista.userListBetoltese());
+        //System.out.println("List mentese:" + felhasznaloLista.userListMentese());
+       // System.out.println("Lista betoltese:" + felhasznaloLista.userListBetoltese());
         
-    }
+        System.out.println("SIZE:" + felhasznaloLista.getSize());
+        felhasznaloLista.userListMentesXML();
+     
+     }
 }

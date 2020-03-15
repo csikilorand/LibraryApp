@@ -13,6 +13,20 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import java.io.File;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerException;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
+
+import org.w3c.dom.Attr;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+
 /**
  *
  * @author Exodia
@@ -92,5 +106,72 @@ public class UsersList implements  Serializable{
         }
         return false;
     } 
+    public int getSize(){
+        return userList.size();
+    }
     
+   
+    public void userListMentesXML(){
+        try{
+            DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
+            
+            //root elements
+            Document doc = docBuilder.newDocument();
+            Element rootElement = doc.createElement("Users");
+            doc.appendChild(rootElement);
+            
+            for(User u : userList){
+                // User elements
+                Element user = doc.createElement("User");
+                rootElement.appendChild(user);
+                // set attribute to user element
+                // shorten way
+                user.setAttribute("id", u.getCNP());
+                //name field
+                // name element
+                Element name = doc.createElement("name");
+                name.appendChild(doc.createTextNode(u.getNev()));
+                user.appendChild(name);
+                //contatAddress
+                // contactAddress elements
+                    Element contactAddress = doc.createElement("ContactAddress");
+
+                    Element telSzam = doc.createElement("telSzam");
+                    telSzam.appendChild(doc.createTextNode(u.getElerhetoseg().getTelSzam()));
+
+                    Element utcaNev = doc.createElement("UtcaNev");
+                    utcaNev.appendChild(doc.createTextNode(u.getElerhetoseg().getUtcaNev()));
+
+                    Element hazSzam = doc.createElement("Hazszam");
+                    Integer i = new Integer(u.getElerhetoseg().getHazSzam());
+                    hazSzam.appendChild(doc.createTextNode( i.toString() ));
+
+                    Element email = doc.createElement("Email");
+                    email.appendChild(doc.createTextNode(u.getElerhetoseg().getEmail()));
+
+                    contactAddress.appendChild(telSzam);
+                    contactAddress.appendChild(utcaNev);
+                    contactAddress.appendChild(hazSzam);
+                    contactAddress.appendChild(email);
+                //contactAddress.appendChild(doc.createTextNode("addr1"));
+                user.appendChild(contactAddress);
+
+            }
+            // write the content into xml file
+            TransformerFactory transformerFactory = TransformerFactory.newInstance();
+            Transformer transformer = transformerFactory.newTransformer();
+            DOMSource source = new DOMSource(doc);
+            StreamResult result = new StreamResult(new File("users2.xml"));
+            
+            transformer.transform(source, result);
+ 
+            System.out.println("File saved!");
+            //return true;
+            
+        }catch(Exception e){
+            e.printStackTrace();
+            
+        }
+    }
 }
