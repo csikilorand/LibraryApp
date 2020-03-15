@@ -28,8 +28,8 @@ public class UserInterface extends javax.swing.JFrame {
         userList.hozzaad(user1);
     }
     public void addBook(){
-        Book konyv1 = new Book("Egri csillagok", "Gardonyi Geza", "Budapest-kiado", 1970, 123456, "1");
-        Book konyv2 = new Book("Ember tragediaja", "Madach Imre", "kolozsvar", 2010, 321654, "2");
+        Book konyv1 = new Book("Egri csillagok", "Gardonyi Geza", "Budapest-kiado", 1970, "123456", "1");
+        Book konyv2 = new Book("Ember tragediaja", "Madach Imre", "kolozsvar", 2010, "321654", "2");
         bookList.hozzaad(konyv2);
         bookList.hozzaad(konyv1);
         Book konyv3 = konyv2;
