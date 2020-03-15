@@ -9,24 +9,24 @@
             <Property name="text" type="java.lang.String" value="File"/>
           </Properties>
           <SubComponents>
-            <Menu class="javax.swing.JMenu" name="jMenu4">
+            <Menu class="javax.swing.JMenu" name="importAs">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Import as..."/>
               </Properties>
               <SubComponents>
-                <MenuItem class="javax.swing.JMenuItem" name="jMenuItem1">
+                <MenuItem class="javax.swing.JMenuItem" name="importAsTxt">
                   <Properties>
                     <Property name="text" type="java.lang.String" value=".txt"/>
                   </Properties>
                 </MenuItem>
-                <MenuItem class="javax.swing.JMenuItem" name="jMenuItem3">
+                <MenuItem class="javax.swing.JMenuItem" name="importAsXml">
                   <Properties>
                     <Property name="text" type="java.lang.String" value=".xml"/>
                   </Properties>
                 </MenuItem>
               </SubComponents>
             </Menu>
-            <Menu class="javax.swing.JMenu" name="jMenu5">
+            <Menu class="javax.swing.JMenu" name="exportAs">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Export as..."/>
               </Properties>
