@@ -26,6 +26,8 @@ import javax.xml.transform.stream.StreamResult;
 import org.w3c.dom.Attr;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 
 /**
  *
@@ -128,7 +130,6 @@ public class UsersList implements  Serializable{
                 // set attribute to user element
                 // shorten way
                 user.setAttribute("id", u.getCNP());
-                //name field
                 // name element
                 Element name = doc.createElement("name");
                 name.appendChild(doc.createTextNode(u.getNev()));
@@ -174,4 +175,46 @@ public class UsersList implements  Serializable{
             
         }
     }
+    
+    public void userListBetoltesXML(){
+        try{
+             File fXmlFile = new File("users2.xml");
+            DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+            Document doc = dBuilder.parse(fXmlFile);
+
+	
+            doc.getDocumentElement().normalize();
+
+            System.out.println("Root element :" + doc.getDocumentElement().getNodeName());
+            NodeList nList = doc.getElementsByTagName("User");
+            
+            for (int temp = 0; temp < nList.getLength(); temp++) {
+
+                Node nNode = nList.item(temp);
+
+                System.out.println("\nCurrent Element :" + nNode.getNodeName());
+
+                if (nNode.getNodeType() == Node.ELEMENT_NODE) {
+
+                    Element eElement = (Element) nNode;
+
+                    System.out.println("User id : " + eElement.getAttribute("id"));
+                    System.out.println("Neve : " + eElement.getElementsByTagName("name").item(0).getTextContent());
+                    //now contactadress element
+                   // Element eeElement = (Element) nNode;
+                    
+                    System.out.println("Tel_szam : " + eElement.getElementsByTagName("telSzam").item(0).getTextContent());
+                    System.out.println("Utca : " + eElement.getElementsByTagName("UtcaNev").item(0).getTextContent());
+                    System.out.println("Hazszam : " + eElement.getElementsByTagName("Hazszam").item(0).getTextContent());
+                    System.out.println("Email : " + eElement.getElementsByTagName("Email").item(0).getTextContent());
+
+                }
+            }
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+    }
+    
+
 }

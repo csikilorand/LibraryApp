@@ -27,6 +27,8 @@ import javax.xml.transform.stream.StreamResult;
 import org.w3c.dom.Attr;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 /**
  *
  * @author Exodia
@@ -109,6 +111,9 @@ public class BooksList implements  Serializable{
         }
         return false;
     } 
+    public int getSize(){
+        return konyvek.size();
+    }
     public void konyvListaMentesXML(){
         try{
         DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
@@ -128,24 +133,30 @@ public class BooksList implements  Serializable{
             
             Element cim = doc.createElement("Cim");
             cim.appendChild(doc.createTextNode(bk.getCim()));
-            book.appendChild(cim);
+           
            
             Element szerzo = doc.createElement("Szerzo");
             szerzo.appendChild(doc.createTextNode(bk.getSzerzo()));
-            book.appendChild(szerzo);
+            
             
             Element kiado = doc.createElement("Kiado");
             kiado.appendChild(doc.createTextNode(bk.getKiado()));
-            book.appendChild(kiado);
+            
             
             Element kiadasEve = doc.createElement("KiadasEve");
             Integer i = new Integer(bk.getKiadasEve());
             kiadasEve.appendChild(doc.createTextNode(i.toString()));
-            book.appendChild(kiadasEve);
+            
             
             Element isbn = doc.createElement("ISBN");
             isbn.appendChild(doc.createTextNode(bk.getISBN()));
-            book.appendChild(isbn);
+            
+            
+             book.appendChild(cim);
+             book.appendChild(szerzo);
+             book.appendChild(kiado);
+             book.appendChild(kiadasEve);
+             book.appendChild(isbn);
         }
         // write the content into xml file
             TransformerFactory transformerFactory = TransformerFactory.newInstance();
@@ -161,5 +172,42 @@ public class BooksList implements  Serializable{
         e.printStackTrace();
     }
         
+    }
+    
+    public void konyvListaBetoltesXML(){
+        try{
+             File fXmlFile = new File("books.xml");
+            DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+            Document doc = dBuilder.parse(fXmlFile);
+
+	
+            doc.getDocumentElement().normalize();
+
+            System.out.println("Root element :" + doc.getDocumentElement().getNodeName());
+            NodeList nList = doc.getElementsByTagName("Book");
+            
+            for (int temp = 0; temp < nList.getLength(); temp++) {
+
+                Node nNode = nList.item(temp);
+
+                System.out.println("\nCurrent Element :" + nNode.getNodeName());
+
+                if (nNode.getNodeType() == Node.ELEMENT_NODE) {
+
+                    Element eElement = (Element) nNode;
+
+                    System.out.println("Book id : " + eElement.getAttribute("id"));
+                    System.out.println("Cime : " + eElement.getElementsByTagName("Cim").item(0).getTextContent());
+                    System.out.println("Szerzo : " + eElement.getElementsByTagName("Szerzo").item(0).getTextContent());
+                    System.out.println("Kiado: " + eElement.getElementsByTagName("Kiado").item(0).getTextContent());
+                    System.out.println("KiadasEve : " + eElement.getElementsByTagName("KiadasEve").item(0).getTextContent());
+                    System.out.println("ISBN : " + eElement.getElementsByTagName("ISBN").item(0).getTextContent());
+
+                }
+            }
+        }catch(Exception e){
+            e.printStackTrace();
+        }
     }
 }

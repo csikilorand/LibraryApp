@@ -37,12 +37,16 @@ public class Main {
         konyvLista.torol(konyv3.getID());
         konyvLista.kiListaz();
         
+        Book bk3 = new Book("KonyvCim", "KonyvSzerzo", "KonyvKiado", 2020, "3692581477", "3");
+        konyvLista.hozzaad(bk3);
+        
         
         //System.out.println(konyvLista.keres(konyv2.getID()));
         //konyvLista.konyvListaMentese();
         //System.out.println(konyvLista.userListBetoltese()) ;
-        
-        konyvLista.konyvListaMentesXML();
+        System.out.println(konyvLista.getSize());
+        //konyvLista.konyvListaMentesXML();
+        konyvLista.konyvListaBetoltesXML();
         
         User user1 = new User("Jozsef", new ContactAddress("1@email.com", "123456", "Maros utca 2"), "123456789");
         User user2 = new User("Anita", new ContactAddress("2@email.com", "987654", "Maros utca 4"),"231456789" );
@@ -59,7 +63,8 @@ public class Main {
        // System.out.println("Lista betoltese:" + felhasznaloLista.userListBetoltese());
         
         System.out.println("SIZE:" + felhasznaloLista.getSize());
-        felhasznaloLista.userListMentesXML();
+        //felhasznaloLista.userListMentesXML();
+        felhasznaloLista.userListBetoltesXML();
      
      }
 }

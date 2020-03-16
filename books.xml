@@ -1,1 +1,17 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><Books><Book id="1"><Cim>Egri csillagok</Cim><Szerzo>Gardonyi Geza</Szerzo><Kiado>Budapest-kiado</Kiado><KiadasEve>1970</KiadasEve><ISBN>123456</ISBN></Book></Books>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Books>
+    <Book id="1">
+        <Cim>Egri csillagok</Cim>
+        <Szerzo>Gardonyi Geza</Szerzo>
+        <Kiado>Budapest-kiado</Kiado>
+        <KiadasEve>1970</KiadasEve>
+        <ISBN>123456</ISBN>
+    </Book>
+    <Book id="3">
+        <Cim>KonyvCim</Cim>
+        <Szerzo>KonyvSzerzo</Szerzo>
+        <Kiado>KonyvKiado</Kiado>
+        <KiadasEve>2020</KiadasEve>
+        <ISBN>3692581477</ISBN>
+    </Book>
+</Books>
