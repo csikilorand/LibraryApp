@@ -5,6 +5,9 @@
  */
 package library;
 
+import java.awt.Button;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Exodia
@@ -12,12 +15,26 @@ package library;
 public class UserInterface extends javax.swing.JFrame {
     private UsersList userList;
     private BooksList bookList;
+    DefaultTableModel model;
+    
+    
     /**
      * Creates new form UserInterface
      */
     public UserInterface() {
         initComponents();
+        Button btn = new Button("egy");
+        splitPane.setLeftComponent(btn);
+        Button btn2 = new Button("ketto");
+        splitPane.setRightComponent(btn2);
+        
+    // plitpane: https://www.youtube.com/watch?v=BvQiKLWrKh8
+        //jtable: https://www.youtube.com/watch?v=TwMXA1S38qg
+        
+        
+        //model  = (DefaultTableModel) table.getModel();
     }
+    
     public void addUser(){
         User user1 = new User("Jozsef", new ContactAddress("1@email.com", "123456", "Maros utca 2"), "123456789");
         User user2 = new User("Anita", new ContactAddress("2@email.com", "987654", "Maros utca 4"),"231456789" );
@@ -46,8 +63,10 @@ public class UserInterface extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        titleLabel = new javax.swing.JLabel();
+        bookLabel = new javax.swing.JLabel();
+        userLabel = new javax.swing.JLabel();
+        splitPane = new javax.swing.JSplitPane();
         MenuBar = new javax.swing.JMenuBar();
         File = new javax.swing.JMenu();
         importAs = new javax.swing.JMenu();
@@ -70,18 +89,14 @@ public class UserInterface extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        jScrollPane1.setViewportView(jTable1);
+        titleLabel.setText("Library App");
+
+        bookLabel.setText("Book List");
+
+        userLabel.setText("User List");
+
+        splitPane.setDividerLocation(100);
+        splitPane.setAutoscrolls(true);
 
         File.setText("File");
 
@@ -169,16 +184,36 @@ public class UserInterface extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 370, Short.MAX_VALUE)
-                .addContainerGap())
+                .addGap(26, 26, 26)
+                .addComponent(bookLabel)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(357, Short.MAX_VALUE)
+                .addComponent(titleLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(243, 243, 243)
+                .addComponent(userLabel)
+                .addGap(64, 64, 64))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                    .addContainerGap(290, Short.MAX_VALUE)
+                    .addComponent(splitPane, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(228, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(56, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(titleLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(userLabel))
+                .addGap(3, 3, 3)
+                .addComponent(bookLabel)
+                .addContainerGap(542, Short.MAX_VALUE))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                    .addContainerGap(287, Short.MAX_VALUE)
+                    .addComponent(splitPane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(287, Short.MAX_VALUE)))
         );
 
         pack();
@@ -249,14 +284,19 @@ public class UserInterface extends javax.swing.JFrame {
     private javax.swing.JMenuItem SearchBook;
     private javax.swing.JMenuItem SearchUser;
     private javax.swing.JMenu User;
+    private javax.swing.JLabel bookLabel;
     private javax.swing.JMenu exportAs;
     private javax.swing.JMenu importAs;
     private javax.swing.JMenuItem importAsTxt;
     private javax.swing.JMenuItem importAsXml;
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JMenu kolcsonzes;
+    private javax.swing.JSplitPane splitPane;
+    private javax.swing.JLabel titleLabel;
+    private javax.swing.JLabel userLabel;
     // End of variables declaration//GEN-END:variables
+   
+    
+    
 }
