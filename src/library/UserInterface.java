@@ -4,7 +4,9 @@
  * and open the template in the editor.
  */
 package library;
-
+/* for giving empty inout a window dialog code:
+ JOptionPane.showMessageDialog(this, "Pls enter data");
+*/
 import java.awt.Button;
 import javax.swing.table.DefaultTableModel;
 
@@ -15,7 +17,7 @@ import javax.swing.table.DefaultTableModel;
 public class UserInterface extends javax.swing.JFrame {
     private UsersList userList;
     private BooksList bookList;
-    DefaultTableModel model;
+   DefaultTableModel tableModel;
     
     
     /**
@@ -23,17 +25,22 @@ public class UserInterface extends javax.swing.JFrame {
      */
     public UserInterface() {
         initComponents();
+        bookList = new BooksList();
         Button btn = new Button("egy");
         splitPane.setLeftComponent(btn);
         Button btn2 = new Button("ketto");
         splitPane.setRightComponent(btn2);
         
-    // plitpane: https://www.youtube.com/watch?v=BvQiKLWrKh8
-        //jtable: https://www.youtube.com/watch?v=TwMXA1S38qg
+        tableModel = (DefaultTableModel) jTable1.getModel();
+        
+        
+    // splitpane: https://www.youtube.com/watch?v=BvQiKLWrKh8
+        
         
         
         //model  = (DefaultTableModel) table.getModel();
     }
+    
     
     public void addUser(){
         User user1 = new User("Jozsef", new ContactAddress("1@email.com", "123456", "Maros utca 2"), "123456789");
@@ -67,6 +74,8 @@ public class UserInterface extends javax.swing.JFrame {
         bookLabel = new javax.swing.JLabel();
         userLabel = new javax.swing.JLabel();
         splitPane = new javax.swing.JSplitPane();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
         MenuBar = new javax.swing.JMenuBar();
         File = new javax.swing.JMenu();
         importAs = new javax.swing.JMenu();
@@ -98,6 +107,16 @@ public class UserInterface extends javax.swing.JFrame {
         splitPane.setDividerLocation(100);
         splitPane.setAutoscrolls(true);
 
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null}
+            },
+            new String [] {
+                "Title 1", "title2", "Title 3"
+            }
+        ));
+        jScrollPane1.setViewportView(jTable1);
+
         File.setText("File");
 
         importAs.setText("Import as...");
@@ -116,6 +135,11 @@ public class UserInterface extends javax.swing.JFrame {
         exportAs.add(jMenuItem4);
 
         jMenuItem5.setText(".xml");
+        jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem5ActionPerformed(evt);
+            }
+        });
         exportAs.add(jMenuItem5);
 
         File.add(exportAs);
@@ -188,16 +212,19 @@ public class UserInterface extends javax.swing.JFrame {
                 .addComponent(bookLabel)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(357, Short.MAX_VALUE)
-                .addComponent(titleLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(243, 243, 243)
-                .addComponent(userLabel)
-                .addGap(64, 64, 64))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                    .addContainerGap(290, Short.MAX_VALUE)
-                    .addComponent(splitPane, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(228, Short.MAX_VALUE)))
+                .addContainerGap(175, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(titleLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(243, 243, 243)
+                        .addComponent(userLabel)
+                        .addGap(64, 64, 64))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(splitPane, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(228, 228, 228))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(133, 133, 133))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -208,12 +235,11 @@ public class UserInterface extends javax.swing.JFrame {
                     .addComponent(userLabel))
                 .addGap(3, 3, 3)
                 .addComponent(bookLabel)
-                .addContainerGap(542, Short.MAX_VALUE))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                    .addContainerGap(287, Short.MAX_VALUE)
-                    .addComponent(splitPane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(287, Short.MAX_VALUE)))
+                .addGap(18, 18, 18)
+                .addComponent(splitPane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(318, Short.MAX_VALUE))
         );
 
         pack();
@@ -225,6 +251,13 @@ public class UserInterface extends javax.swing.JFrame {
 
     private void ListBookActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ListBookActionPerformed
         // TODO add your handling code here:
+       // System.out.println(bookList.getSize());
+        System.out.println("Hello");
+    //Integer i = bookList.getSize();    
+    //String [] rowData ={i.toString()} ;
+    
+        
+      //  tableModel.addRow( rowData);
     }//GEN-LAST:event_ListBookActionPerformed
 
     private void AddUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddUserActionPerformed
@@ -235,6 +268,11 @@ public class UserInterface extends javax.swing.JFrame {
         
         // TODO add your handling code here:
     }//GEN-LAST:event_AddBookActionPerformed
+
+    private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
+        // TODO add your handling code here:
+        bookList.konyvListaBetoltesXML();
+    }//GEN-LAST:event_jMenuItem5ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -291,6 +329,8 @@ public class UserInterface extends javax.swing.JFrame {
     private javax.swing.JMenuItem importAsXml;
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable jTable1;
     private javax.swing.JMenu kolcsonzes;
     private javax.swing.JSplitPane splitPane;
     private javax.swing.JLabel titleLabel;

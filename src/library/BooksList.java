@@ -174,7 +174,7 @@ public class BooksList implements  Serializable{
         
     }
     
-    public void konyvListaBetoltesXML(){
+    public Boolean konyvListaBetoltesXML(){
         try{
              File fXmlFile = new File("books.xml");
             DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
@@ -203,11 +203,14 @@ public class BooksList implements  Serializable{
                     System.out.println("Kiado: " + eElement.getElementsByTagName("Kiado").item(0).getTextContent());
                     System.out.println("KiadasEve : " + eElement.getElementsByTagName("KiadasEve").item(0).getTextContent());
                     System.out.println("ISBN : " + eElement.getElementsByTagName("ISBN").item(0).getTextContent());
-
+                    return true;
                 }
             }
         }catch(Exception e){
             e.printStackTrace();
         }
+        return false;
     }
+    
+    
 }
