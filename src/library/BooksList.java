@@ -173,7 +173,50 @@ public class BooksList implements  Serializable{
     }
         
     }
-    
+   
+    public List<Book> importBookListXML(){
+        try{
+            File fXmlFile = new File("books.xml");
+            DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+            Document doc = dBuilder.parse(fXmlFile);
+            doc.getDocumentElement().normalize();
+             
+            List<Book> ujLista = new ArrayList<Book>();
+            
+            System.out.println("Root element :" + doc.getDocumentElement().getNodeName());
+            NodeList nList = doc.getElementsByTagName("Book");
+            
+            for (int temp = 0; temp < nList.getLength(); temp++) {
+                Node nNode = nList.item(temp);
+                Book konyv = new Book();
+                if (nNode.getNodeType() == Node.ELEMENT_NODE) {
+                    Element eElement = (Element) nNode;
+                    
+                    konyv.setID(eElement.getAttribute("id"));
+                    konyv.setCim(eElement.getElementsByTagName("Cim").item(0).getTextContent());
+                    konyv.setSzerzo(eElement.getElementsByTagName("Szerzo").item(0).getTextContent());
+                    
+                    konyv.setKiado(eElement.getElementsByTagName("Kiado").item(0).getTextContent());
+                    
+                    
+                    String s = "";
+                    s = eElement.getElementsByTagName("KiadasEve").item(0).getTextContent();
+                    Integer i = Integer.parseInt(s);
+                    konyv.setKiadasEve(i);
+                    konyv.setISBN(eElement.getElementsByTagName("ISBN").item(0).getTextContent());
+                    ujLista.add(konyv);
+                }
+            }
+            return ujLista;
+            
+            
+            
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+       return null;
+    }
     public Boolean konyvListaBetoltesXML(){
         try{
              File fXmlFile = new File("books.xml");
@@ -203,9 +246,10 @@ public class BooksList implements  Serializable{
                     System.out.println("Kiado: " + eElement.getElementsByTagName("Kiado").item(0).getTextContent());
                     System.out.println("KiadasEve : " + eElement.getElementsByTagName("KiadasEve").item(0).getTextContent());
                     System.out.println("ISBN : " + eElement.getElementsByTagName("ISBN").item(0).getTextContent());
-                    return true;
+                    
                 }
             }
+            return true;
         }catch(Exception e){
             e.printStackTrace();
         }

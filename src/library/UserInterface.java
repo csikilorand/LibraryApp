@@ -8,6 +8,8 @@ package library;
  JOptionPane.showMessageDialog(this, "Pls enter data");
 */
 import java.awt.Button;
+import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -16,7 +18,8 @@ import javax.swing.table.DefaultTableModel;
  */
 public class UserInterface extends javax.swing.JFrame {
     private UsersList userList;
-    private BooksList bookList;
+    public static BooksList bookList;
+    List<Book> lista;
    DefaultTableModel tableModel;
     
     
@@ -38,7 +41,7 @@ public class UserInterface extends javax.swing.JFrame {
         
         
         
-        //model  = (DefaultTableModel) table.getModel();
+        
     }
     
     
@@ -109,12 +112,20 @@ public class UserInterface extends javax.swing.JFrame {
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null}
+                {null, null, null, null, null, null}
             },
             new String [] {
-                "Title 1", "title2", "Title 3"
+                "Cim", "Szerzo", "Kiado", "KiadasEve", "ID", "ISBN"
             }
-        ));
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.String.class, java.lang.String.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
         jScrollPane1.setViewportView(jTable1);
 
         File.setText("File");
@@ -250,18 +261,29 @@ public class UserInterface extends javax.swing.JFrame {
     }//GEN-LAST:event_DeleteBookActionPerformed
 
     private void ListBookActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ListBookActionPerformed
-        // TODO add your handling code here:
-       // System.out.println(bookList.getSize());
-        System.out.println("Hello");
-    //Integer i = bookList.getSize();    
-    //String [] rowData ={i.toString()} ;
+        if(1 > bookList.getSize()){
+           // JOptionPane.showMessageDialog(this, "Pls enter data");
+           //System.out.println(bookList.importBookListXML() );
+          lista =  bookList.importBookListXML();
+           
+            System.out.println("Size:" +lista.size());
+            //tableModel.addColumn();
+        }
+        else{
+           // for(int i=0; i <bookList.getSize(); ++i){
+              //  System.out.println("hello");
+              
+            }
+        
     
         
       //  tableModel.addRow( rowData);
+
     }//GEN-LAST:event_ListBookActionPerformed
 
     private void AddUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddUserActionPerformed
         // TODO add your handling code here:
+        
     }//GEN-LAST:event_AddUserActionPerformed
 
     private void AddBookActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddBookActionPerformed
@@ -271,7 +293,8 @@ public class UserInterface extends javax.swing.JFrame {
 
     private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
         // TODO add your handling code here:
-        bookList.konyvListaBetoltesXML();
+        
+        
     }//GEN-LAST:event_jMenuItem5ActionPerformed
 
     /**
@@ -337,6 +360,6 @@ public class UserInterface extends javax.swing.JFrame {
     private javax.swing.JLabel userLabel;
     // End of variables declaration//GEN-END:variables
    
-    
+
     
 }
