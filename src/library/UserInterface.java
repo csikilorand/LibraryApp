@@ -9,6 +9,8 @@ package library;
 */
 import java.awt.Button;
 import java.util.List;
+import java.util.Vector;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -112,18 +114,25 @@ public class UserInterface extends javax.swing.JFrame {
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null}
+
             },
             new String [] {
-                "Cim", "Szerzo", "Kiado", "KiadasEve", "ID", "ISBN"
+                "ID", "Cim", "Szerzo", "Kiado", "KiadasEve", "ISBN"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.String.class, java.lang.String.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
             }
         });
         jScrollPane1.setViewportView(jTable1);
@@ -261,24 +270,15 @@ public class UserInterface extends javax.swing.JFrame {
     }//GEN-LAST:event_DeleteBookActionPerformed
 
     private void ListBookActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ListBookActionPerformed
-        if(1 > bookList.getSize()){
-           // JOptionPane.showMessageDialog(this, "Pls enter data");
-           //System.out.println(bookList.importBookListXML() );
-          lista =  bookList.importBookListXML();
-           
-            System.out.println("Size:" +lista.size());
-            //tableModel.addColumn();
-        }
-        else{
-           // for(int i=0; i <bookList.getSize(); ++i){
-              //  System.out.println("hello");
-              
+        //System.out.println("Size:" +lista.size());
+        if(tableModel.getRowCount() < 1){
+            lista = bookList.importBookListXML();
+            for(int i=0 ;i < lista.size(); ++i){
+              tableModel.insertRow(tableModel.getRowCount(), new Object[]{lista.get(i).getID(), lista.get(i).getCim(), lista.get(i).getSzerzo(),
+                                        lista.get(i).getKiado(), lista.get(i).getKiadasEve(), lista.get(i).getISBN() } );
             }
         
-    
-        
-      //  tableModel.addRow( rowData);
-
+        }
     }//GEN-LAST:event_ListBookActionPerformed
 
     private void AddUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddUserActionPerformed
@@ -287,6 +287,8 @@ public class UserInterface extends javax.swing.JFrame {
     }//GEN-LAST:event_AddUserActionPerformed
 
     private void AddBookActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddBookActionPerformed
+        JFrame newFrame = new JFrame();
+        newFrame.setVisible(true);
         
         // TODO add your handling code here:
     }//GEN-LAST:event_AddBookActionPerformed
