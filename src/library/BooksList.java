@@ -111,6 +111,22 @@ public class BooksList implements  Serializable{
         }
         return false;
     } 
+    public List<Book> konyvListaBetoltesTXT(){
+        String filename = "konyvek.txt";
+        try{
+            FileInputStream file = new FileInputStream(filename);
+            ObjectInputStream out2 = new ObjectInputStream(file);
+            //ObjectOutputStream out = new ObjectOutputStream(file);
+            List<Book> ujLista = new ArrayList<Book>();
+            ujLista = (List<Book>) out2.readObject();
+            return ujLista;
+        }catch(Exception e){
+            e.printStackTrace();
+            
+        }
+        return null;
+    }
+    
     public int getSize(){
         return konyvek.size();
     }

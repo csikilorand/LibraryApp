@@ -8,10 +8,21 @@ package library;
  JOptionPane.showMessageDialog(this, "Pls enter data");
 */
 import java.awt.Button;
+import java.awt.Dimension;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+import javax.swing.Timer;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -21,7 +32,10 @@ import javax.swing.table.DefaultTableModel;
 public class UserInterface extends javax.swing.JFrame {
     private UsersList userList;
     public static BooksList bookList;
-    List<Book> lista;
+    private Book book;
+    
+   // private MyPanel panel;
+    List<Book> lista = new ArrayList<Book>();
    DefaultTableModel tableModel;
     
     
@@ -35,37 +49,12 @@ public class UserInterface extends javax.swing.JFrame {
         splitPane.setLeftComponent(btn);
         Button btn2 = new Button("ketto");
         splitPane.setRightComponent(btn2);
-        
         tableModel = (DefaultTableModel) jTable1.getModel();
-        
-        
+ 
     // splitpane: https://www.youtube.com/watch?v=BvQiKLWrKh8
-        
-        
-        
-        
+
     }
     
-    
-    public void addUser(){
-        User user1 = new User("Jozsef", new ContactAddress("1@email.com", "123456", "Maros utca 2"), "123456789");
-        User user2 = new User("Anita", new ContactAddress("2@email.com", "987654", "Maros utca 4"),"231456789" );
-        User user3 = user2;
-        user3.setNev("Dani");
-        userList.hozzaad(user3);
-        userList.hozzaad(user2);
-        userList.hozzaad(user1);
-    }
-    public void addBook(){
-        Book konyv1 = new Book("Egri csillagok", "Gardonyi Geza", "Budapest-kiado", 1970, "123456", "1");
-        Book konyv2 = new Book("Ember tragediaja", "Madach Imre", "kolozsvar", 2010, "321654", "2");
-        bookList.hozzaad(konyv2);
-        bookList.hozzaad(konyv1);
-        Book konyv3 = konyv2;
-        konyv3.setKiado("Kolozsvar");
-        bookList.modosit("2", konyv3);
-        
-    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -75,31 +64,163 @@ public class UserInterface extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jDialog2 = new javax.swing.JDialog();
+        kiadasEveField = new javax.swing.JTextField();
+        jLabel6 = new javax.swing.JLabel();
+        ISBNField = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
+        AddButton = new javax.swing.JButton();
+        cimField = new javax.swing.JTextField();
+        CancelButton = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        szerzoField = new javax.swing.JTextField();
+        kiadoField = new javax.swing.JTextField();
+        jLabel5 = new javax.swing.JLabel();
         titleLabel = new javax.swing.JLabel();
         bookLabel = new javax.swing.JLabel();
         userLabel = new javax.swing.JLabel();
         splitPane = new javax.swing.JSplitPane();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
         MenuBar = new javax.swing.JMenuBar();
         File = new javax.swing.JMenu();
-        importAs = new javax.swing.JMenu();
-        importAsTxt = new javax.swing.JMenuItem();
-        importAsXml = new javax.swing.JMenuItem();
-        exportAs = new javax.swing.JMenu();
+        bookMenu = new javax.swing.JMenu();
+        importBookAs = new javax.swing.JMenu();
+        importBookTXT = new javax.swing.JMenuItem();
+        importBookXML = new javax.swing.JMenuItem();
+        exportBookAs = new javax.swing.JMenu();
+        exportBookAsTXT = new javax.swing.JMenuItem();
+        exportBookAsXML = new javax.swing.JMenuItem();
+        userMenu = new javax.swing.JMenu();
+        jMenu3 = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
+        jMenuItem2 = new javax.swing.JMenuItem();
+        jMenu4 = new javax.swing.JMenu();
+        jMenuItem3 = new javax.swing.JMenuItem();
         jMenuItem4 = new javax.swing.JMenuItem();
-        jMenuItem5 = new javax.swing.JMenuItem();
-        Book = new javax.swing.JMenu();
-        AddBook = new javax.swing.JMenuItem();
-        SearchBook = new javax.swing.JMenuItem();
-        DeleteBook = new javax.swing.JMenuItem();
-        ListBook = new javax.swing.JMenuItem();
         User = new javax.swing.JMenu();
         AddUser = new javax.swing.JMenuItem();
-        SearchUser = new javax.swing.JMenuItem();
-        DeleteUser = new javax.swing.JMenuItem();
         ListUser = new javax.swing.JMenuItem();
+        Book = new javax.swing.JMenu();
+        AddBook = new javax.swing.JMenuItem();
+        ListBook = new javax.swing.JMenuItem();
         kolcsonzes = new javax.swing.JMenu();
+
+        jDialog2.setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
+        jDialog2.setTitle("Adding");
+
+        kiadasEveField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                kiadasEveFieldActionPerformed(evt);
+            }
+        });
+
+        jLabel6.setText("ISBN:");
+
+        jLabel1.setText("Cim:");
+
+        AddButton.setText("Add");
+        AddButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AddButtonActionPerformed(evt);
+            }
+        });
+
+        cimField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cimFieldActionPerformed(evt);
+            }
+        });
+
+        CancelButton.setText("Cancel");
+        CancelButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CancelButtonActionPerformed(evt);
+            }
+        });
+
+        jLabel3.setText("Szerzo:");
+
+        jLabel4.setText("Kiadó:");
+
+        szerzoField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                szerzoFieldActionPerformed(evt);
+            }
+        });
+
+        kiadoField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                kiadoFieldActionPerformed(evt);
+            }
+        });
+
+        jLabel5.setText("Kiadas éve:");
+
+        javax.swing.GroupLayout jDialog2Layout = new javax.swing.GroupLayout(jDialog2.getContentPane());
+        jDialog2.getContentPane().setLayout(jDialog2Layout);
+        jDialog2Layout.setHorizontalGroup(
+            jDialog2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jDialog2Layout.createSequentialGroup()
+                .addGap(86, 86, 86)
+                .addGroup(jDialog2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(AddButton)
+                    .addComponent(jLabel6)
+                    .addComponent(jLabel5)
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel4)
+                    .addComponent(jLabel1))
+                .addGroup(jDialog2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jDialog2Layout.createSequentialGroup()
+                        .addGap(35, 35, 35)
+                        .addGroup(jDialog2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jDialog2Layout.createSequentialGroup()
+                                .addGroup(jDialog2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(szerzoField)
+                                    .addComponent(kiadoField, javax.swing.GroupLayout.DEFAULT_SIZE, 105, Short.MAX_VALUE)
+                                    .addComponent(cimField, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(kiadasEveField))
+                                .addGap(109, 109, 109))
+                            .addGroup(jDialog2Layout.createSequentialGroup()
+                                .addComponent(ISBNField, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                    .addGroup(jDialog2Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(CancelButton)
+                        .addGap(81, 81, 81))))
+        );
+        jDialog2Layout.setVerticalGroup(
+            jDialog2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jDialog2Layout.createSequentialGroup()
+                .addGap(28, 28, 28)
+                .addGroup(jDialog2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cimField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1))
+                .addGap(18, 18, 18)
+                .addGroup(jDialog2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(szerzoField, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3))
+                .addGap(18, 18, 18)
+                .addGroup(jDialog2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(kiadoField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4))
+                .addGap(18, 18, 18)
+                .addGroup(jDialog2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel5)
+                    .addComponent(kiadasEveField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jDialog2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6)
+                    .addComponent(ISBNField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jDialog2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(CancelButton)
+                    .addComponent(AddButton))
+                .addContainerGap(30, Short.MAX_VALUE))
+        );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -137,38 +258,95 @@ public class UserInterface extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(jTable1);
 
-        File.setText("File");
-
-        importAs.setText("Import as...");
-
-        importAsTxt.setText(".txt");
-        importAs.add(importAsTxt);
-
-        importAsXml.setText(".xml");
-        importAs.add(importAsXml);
-
-        File.add(importAs);
-
-        exportAs.setText("Export as...");
-
-        jMenuItem4.setText(".txt");
-        exportAs.add(jMenuItem4);
-
-        jMenuItem5.setText(".xml");
-        jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
+        jButton1.setText("Delete");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem5ActionPerformed(evt);
+                jButton1ActionPerformed(evt);
             }
         });
-        exportAs.add(jMenuItem5);
 
-        File.add(exportAs);
+        jButton2.setText("jButton2");
+
+        File.setText("File");
+
+        bookMenu.setText("Book");
+
+        importBookAs.setText("import as...");
+
+        importBookTXT.setText(".txt");
+        importBookTXT.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                importBookTXTActionPerformed(evt);
+            }
+        });
+        importBookAs.add(importBookTXT);
+
+        importBookXML.setText(".xml");
+        importBookXML.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                importBookXMLActionPerformed(evt);
+            }
+        });
+        importBookAs.add(importBookXML);
+
+        bookMenu.add(importBookAs);
+
+        exportBookAs.setText("export as...");
+
+        exportBookAsTXT.setText(".txt");
+        exportBookAs.add(exportBookAsTXT);
+
+        exportBookAsXML.setText(".xml");
+        exportBookAs.add(exportBookAsXML);
+
+        bookMenu.add(exportBookAs);
+
+        File.add(bookMenu);
+
+        userMenu.setText("User");
+
+        jMenu3.setText("import as...");
+
+        jMenuItem1.setText(".txt");
+        jMenu3.add(jMenuItem1);
+
+        jMenuItem2.setText(".xml");
+        jMenu3.add(jMenuItem2);
+
+        userMenu.add(jMenu3);
+
+        jMenu4.setText("export as...");
+
+        jMenuItem3.setText(".txt");
+        jMenu4.add(jMenuItem3);
+
+        jMenuItem4.setText(".xml");
+        jMenu4.add(jMenuItem4);
+
+        userMenu.add(jMenu4);
+
+        File.add(userMenu);
 
         MenuBar.add(File);
 
+        User.setText("User");
+
+        AddUser.setText("Add");
+        AddUser.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AddUserActionPerformed(evt);
+            }
+        });
+        User.add(AddUser);
+
+        ListUser.setText("List");
+        User.add(ListUser);
+
+        MenuBar.add(User);
+
         Book.setText("Book");
 
-        AddBook.setText("HozzaAdas");
+        AddBook.setText("Add");
         AddBook.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 AddBookActionPerformed(evt);
@@ -176,18 +354,7 @@ public class UserInterface extends javax.swing.JFrame {
         });
         Book.add(AddBook);
 
-        SearchBook.setText("Kereses");
-        Book.add(SearchBook);
-
-        DeleteBook.setText("Torles");
-        DeleteBook.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                DeleteBookActionPerformed(evt);
-            }
-        });
-        Book.add(DeleteBook);
-
-        ListBook.setText("Listazas");
+        ListBook.setText("List");
         ListBook.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ListBookActionPerformed(evt);
@@ -196,27 +363,6 @@ public class UserInterface extends javax.swing.JFrame {
         Book.add(ListBook);
 
         MenuBar.add(Book);
-
-        User.setText("User");
-
-        AddUser.setText("HozzaAd");
-        AddUser.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                AddUserActionPerformed(evt);
-            }
-        });
-        User.add(AddUser);
-
-        SearchUser.setText("Kereses");
-        User.add(SearchUser);
-
-        DeleteUser.setText("Delete");
-        User.add(DeleteUser);
-
-        ListUser.setText("List");
-        User.add(ListUser);
-
-        MenuBar.add(User);
 
         kolcsonzes.setText("Kolcsonzes");
         MenuBar.add(kolcsonzes);
@@ -244,7 +390,12 @@ public class UserInterface extends javax.swing.JFrame {
                         .addGap(228, 228, 228))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(133, 133, 133))))
+                        .addGap(133, 133, 133))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jButton2)
+                        .addGap(121, 121, 121)
+                        .addComponent(jButton1)
+                        .addGap(231, 231, 231))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -259,45 +410,151 @@ public class UserInterface extends javax.swing.JFrame {
                 .addComponent(splitPane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(318, Short.MAX_VALUE))
+                .addGap(68, 68, 68)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton1)
+                    .addComponent(jButton2))
+                .addContainerGap(220, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void DeleteBookActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DeleteBookActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_DeleteBookActionPerformed
-
     private void ListBookActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ListBookActionPerformed
-        //System.out.println("Size:" +lista.size());
-        if(tableModel.getRowCount() < 1){
-            lista = bookList.importBookListXML();
-            for(int i=0 ;i < lista.size(); ++i){
-              tableModel.insertRow(tableModel.getRowCount(), new Object[]{lista.get(i).getID(), lista.get(i).getCim(), lista.get(i).getSzerzo(),
-                                        lista.get(i).getKiado(), lista.get(i).getKiadasEve(), lista.get(i).getISBN() } );
-            }
-        
+        if(lista.size() < 1){
+            JOptionPane.showMessageDialog(this, "No data to display");
         }
+        else{
+            tableModel.setRowCount(0);
+            if(tableModel.getRowCount() < 1){
+         
+            System.out.println("ROWCOUNT:"+ tableModel.getRowCount());
+            
+            System.out.println("LIsta Size:"+lista.size());
+            //lista = bookList.importBookListXML();
+            for(int i=0 ;i < lista.size(); ++i){
+                tableModel.insertRow(tableModel.getRowCount(), new Object[]{lista.get(i).getID(), lista.get(i).getCim(), lista.get(i).getSzerzo(),
+                    lista.get(i).getKiado(), lista.get(i).getKiadasEve(), lista.get(i).getISBN() } );
+            }
+                System.out.println("ROWCOUNT:"+ tableModel.getRowCount());
+          }
+        }
+        
     }//GEN-LAST:event_ListBookActionPerformed
+
+    private void AddBookActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddBookActionPerformed
+       jDialog2.pack();
+       jDialog2.setVisible(true);
+       this.setEnabled(false);
+       cimField.setText("");
+       szerzoField.setText("");
+       kiadoField.setText("");
+       kiadasEveField.setText("");
+       ISBNField.setText("");
+    }//GEN-LAST:event_AddBookActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        int selectedRow = jTable1.getSelectedRow();
+        if( selectedRow >= 0){
+            lista.remove(selectedRow);
+            System.out.println("SIZE: " + lista.size());
+            ListBookActionPerformed(evt);
+        }
+        else{
+            JOptionPane.showMessageDialog(this, "Pls select data");
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     private void AddUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddUserActionPerformed
         // TODO add your handling code here:
-        
+
     }//GEN-LAST:event_AddUserActionPerformed
 
-    private void AddBookActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddBookActionPerformed
-        JFrame newFrame = new JFrame();
-        newFrame.setVisible(true);
-        
+    private void kiadasEveFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_kiadasEveFieldActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_AddBookActionPerformed
+    }//GEN-LAST:event_kiadasEveFieldActionPerformed
 
-    private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
+    private void AddButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddButtonActionPerformed
+        System.out.println(lista.size());
+        Integer i = 0;
+        if( cimField.getText().equals("") ){
+            JOptionPane.showMessageDialog(this, "Pls enter data into Cim");
+        }
+        else{
+            if ( szerzoField.getText().equals("") ){
+                JOptionPane.showMessageDialog(this, "Pls enter data into Szerzo");
+            }
+            else{
+                if( kiadoField.getText().equals("") ){
+                    JOptionPane.showMessageDialog(this, "Pls enter data into Kiado");
+                }
+                else{
+                    if( kiadasEveField.getText().equals("") ){
+                        JOptionPane.showMessageDialog(this, "Pls enter data into Kiadas Eve");
+                    }
+                    else{
+                        try{
+                            i = Integer.valueOf(kiadasEveField.getText());
+                        }catch(Exception e){
+                            JOptionPane.showMessageDialog(this, "Pls enter valid number into Kiadas Eve ");
+                        }
+                        book = new Book();
+                        book.setCim(cimField.getText());
+                        book.setSzerzo(szerzoField.getText());
+                        book.setKiado(kiadoField.getText());
+                        book.setKiadasEve(i);
+                        book.setISBN(ISBNField.getText());
+                        this.setEnabled(true);
+                        jDialog2.dispose();
+                        lista.add(book);
+                        System.out.println(lista.size());
+                        ListBookActionPerformed(evt);
+                    }
+                }
+            }
+        }
+    }//GEN-LAST:event_AddButtonActionPerformed
+    public void disposeDialog(){
+        if(!this.isEnabled()){
+            this.setEnabled(true);
+        }
+        
+        jDialog2.dispose();
+    }
+    private void cimFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cimFieldActionPerformed
         // TODO add your handling code here:
-        
-        
-    }//GEN-LAST:event_jMenuItem5ActionPerformed
+    }//GEN-LAST:event_cimFieldActionPerformed
+
+    private void CancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CancelButtonActionPerformed
+        disposeDialog();
+        // TODO add your handling code here:
+    }//GEN-LAST:event_CancelButtonActionPerformed
+
+    private void szerzoFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_szerzoFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_szerzoFieldActionPerformed
+
+    private void kiadoFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_kiadoFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_kiadoFieldActionPerformed
+
+    private void importBookTXTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_importBookTXTActionPerformed
+        try{
+           
+        }catch(Exception e){
+             JOptionPane.showMessageDialog(this, "Import unsuccesful!");
+        }
+    }//GEN-LAST:event_importBookTXTActionPerformed
+
+    private void importBookXMLActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_importBookXMLActionPerformed
+       try{
+            lista = bookList.importBookListXML();
+            JOptionPane.showMessageDialog(this, "Import succesful!");
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(this, "Import unsuccesful!");
+        }
+    }//GEN-LAST:event_importBookXMLActionPerformed
 
     /**
      * @param args the command line arguments
@@ -336,32 +593,53 @@ public class UserInterface extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem AddBook;
+    private javax.swing.JButton AddButton;
     private javax.swing.JMenuItem AddUser;
     private javax.swing.JMenu Book;
-    private javax.swing.JMenuItem DeleteBook;
-    private javax.swing.JMenuItem DeleteUser;
+    private javax.swing.JButton CancelButton;
     private javax.swing.JMenu File;
-    private javax.swing.JMenuItem ListBook;
+    private javax.swing.JTextField ISBNField;
+    protected javax.swing.JMenuItem ListBook;
     private javax.swing.JMenuItem ListUser;
     private javax.swing.JMenuBar MenuBar;
-    private javax.swing.JMenuItem SearchBook;
-    private javax.swing.JMenuItem SearchUser;
     private javax.swing.JMenu User;
     private javax.swing.JLabel bookLabel;
-    private javax.swing.JMenu exportAs;
-    private javax.swing.JMenu importAs;
-    private javax.swing.JMenuItem importAsTxt;
-    private javax.swing.JMenuItem importAsXml;
+    private javax.swing.JMenu bookMenu;
+    private javax.swing.JTextField cimField;
+    private javax.swing.JMenu exportBookAs;
+    private javax.swing.JMenuItem exportBookAsTXT;
+    private javax.swing.JMenuItem exportBookAsXML;
+    private javax.swing.JMenu importBookAs;
+    private javax.swing.JMenuItem importBookTXT;
+    private javax.swing.JMenuItem importBookXML;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JDialog jDialog2;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JMenu jMenu3;
+    private javax.swing.JMenu jMenu4;
+    private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
-    private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
+    private javax.swing.JTextField kiadasEveField;
+    private javax.swing.JTextField kiadoField;
     private javax.swing.JMenu kolcsonzes;
     private javax.swing.JSplitPane splitPane;
+    private javax.swing.JTextField szerzoField;
     private javax.swing.JLabel titleLabel;
     private javax.swing.JLabel userLabel;
+    private javax.swing.JMenu userMenu;
     // End of variables declaration//GEN-END:variables
    
 
     
+    
+
 }

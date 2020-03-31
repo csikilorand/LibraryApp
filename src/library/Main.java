@@ -5,7 +5,12 @@
  */
 package library;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
+import javax.swing.BorderFactory;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
 
 /**
  *
@@ -16,7 +21,9 @@ public class Main {
     /**
      * @param args the command line arguments
      */
+    
     public static void main(String[] args) {
+       /*
         // TODO code application logic here
         String cim = "Mikszath Kalman";
         //System.out.println(Integer.MAX_VALUE);
@@ -65,6 +72,10 @@ public class Main {
         System.out.println("SIZE:" + felhasznaloLista.getSize());
         //felhasznaloLista.userListMentesXML();
         felhasznaloLista.userListBetoltesXML();
-     
+     */
+      List<Book> enlista = new ArrayList<Book>();
+      BooksList b = new BooksList();
+      enlista = b.konyvListaBetoltesTXT();
+        System.out.println(enlista.toString());
      }
 }
